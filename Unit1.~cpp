@@ -59,3 +59,32 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
        }
 }
 //---------------------------------------------------------------------------
+void __fastcall TForm1::PaddleLeftToUpTimer(TObject *Sender)
+{
+        if(PaddleLeft->Top > Background->Top + 6)PaddleLeft->Top -= 10;
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::PaddleLeftToDownTimer(TObject *Sender)
+{
+        if((PaddleLeft->Top + PaddleLeft->Height) < (Background->Top + Background->Height - 6))PaddleLeft->Top += 10;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
+      TShiftState Shift)
+{
+       if(Key == 'A') PaddleLeftToUp -> Enabled = true;
+       if(Key == 'Z') PaddleLeftToDown -> Enabled = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
+      TShiftState Shift)
+{
+      if(Key == 'A') PaddleLeftToUp -> Enabled = false;
+      if(Key == 'Z') PaddleLeftToDown -> Enabled = false;
+}
+//---------------------------------------------------------------------------
+

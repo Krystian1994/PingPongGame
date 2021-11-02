@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 192
-  Top = 125
-  Width = 1085
-  Height = 561
+  Left = 151
+  Top = 157
+  Width = 1100
+  Height = 588
   Caption = 'Form1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,13 +11,15 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnKeyDown = FormKeyDown
+  OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
   object Background: TShape
     Left = 0
     Top = 0
-    Width = 1069
-    Height = 522
+    Width = 1084
+    Height = 549
     Align = alClient
     Brush.Color = clMoneyGreen
   end
@@ -534,12 +536,16 @@ object Form1: TForm1
     Top = 184
   end
   object PaddleLeftToUp: TTimer
+    Enabled = False
     Interval = 40
+    OnTimer = PaddleLeftToUpTimer
     Left = 56
     Top = 120
   end
   object PaddleLeftToDown: TTimer
+    Enabled = False
     Interval = 40
+    OnTimer = PaddleLeftToDownTimer
     Left = 56
     Top = 376
   end

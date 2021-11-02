@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 151
-  Top = 157
+  Left = 184
+  Top = 137
   Width = 1100
   Height = 588
   Caption = 'Form1'
@@ -548,5 +548,19 @@ object Form1: TForm1
     OnTimer = PaddleLeftToDownTimer
     Left = 56
     Top = 376
+  end
+  object PaddleRightToUp: TTimer
+    Enabled = False
+    Interval = 40
+    OnTimer = PaddleRightToUpTimer
+    Left = 1000
+    Top = 128
+  end
+  object PaddleRightToDown: TTimer
+    Enabled = False
+    Interval = 40
+    OnTimer = PaddleRightToDownTimer
+    Left = 1000
+    Top = 384
   end
 end
