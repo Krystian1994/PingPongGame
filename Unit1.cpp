@@ -32,27 +32,49 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 y = -y;
         }
         //warunek odbicia lewej paletki
-        if(Ball->Left <= PaddleLeft->Left + 24 &&
+        if(Ball->Left <= PaddleLeft->Left + 24 && (
                 Ball->Top + 16 >= PaddleLeft->Top &&
-                Ball->Top + 16 <= PaddleLeft->Top + 100)
+                Ball->Top + 43 < PaddleLeft->Top ||
+                Ball->Top + 57 > PaddleLeft->Top &&
+                Ball->Top + 16 <= PaddleLeft->Top + 100))
         {
+                BallTimer->Interval-=2;
+                x = -x;
+        }
+        //warunek scinania pi³ki lew¹ paletk¹
+        if(Ball->Left <= PaddleLeft->Left + 24 &&
+                Ball->Top + 43 >= PaddleLeft->Top &&
+                Ball->Top + 57 <= PaddleLeft->Top)
+        {
+                BallTimer->Interval+=7;
                 x = -x;
         }
         //warunek odbicia prawej paletki
-        if(Ball->Left + Ball->Width + 4 >= PaddleRight->Left &&
+        if(Ball->Left + Ball->Width + 4 >= PaddleRight->Left && (
                 Ball->Top + 16 >= PaddleRight->Top &&
-                Ball->Top + 16 <= PaddleRight->Top + 100)
+                Ball->Top + 43 < PaddleRight->Top ||
+                Ball->Top + 57 > PaddleRight->Top &&
+                Ball->Top + 16 <= PaddleRight->Top + 100))
         {
+                BallTimer->Interval-=2;
+                x = -x;
+        }
+        //warunek scinania pi³ki praw¹ paletk¹
+        if(Ball->Left + Ball->Width + 4 >= PaddleRight->Left &&
+                Ball->Top + 43 >= PaddleRight->Top &&
+                Ball->Top + 57 <= PaddleRight->Top)
+        {
+                BallTimer->Interval+=7;
                 x = -x;
         }
         // skucha z lewej
-        if(Ball->Left < PaddleLeft->Left + 6)
+        if(Ball->Left < PaddleLeft->Left)
         {
                 Ball -> Enabled = false;
                 Ball -> Visible = false;
         }
         // skucha z prawej
-       if(Ball->Left + 32 >= PaddleRight->Left +  14)
+       if(Ball->Left + 32 >= PaddleRight->Left + 20)
        {
                 Ball -> Enabled = false;
                 Ball -> Visible = false;

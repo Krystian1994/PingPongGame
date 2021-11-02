@@ -27,7 +27,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 y = -y;
         }
         // odbicie od do³u
-        else if(Ball->Top > Background->Top + 454)
+        else if(Ball->Top > Background->Top + 500)
         {
                 y = -y;
         }
@@ -39,7 +39,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 x = -x;
         }
         //warunek odbicia prawej paletki
-        if(Ball->Left >= PaddleRight->Left - 4 &&
+        if(Ball->Left + Ball->Width + 4 >= PaddleRight->Left &&
                 Ball->Top + 16 >= PaddleRight->Top &&
                 Ball->Top + 16 <= PaddleRight->Top + 100)
         {
@@ -77,6 +77,8 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 {
        if(Key == 'A') PaddleLeftToUp -> Enabled = true;
        if(Key == 'Z') PaddleLeftToDown -> Enabled = true;
+       if(Key == VK_UP) PaddleRightToUp -> Enabled = true;
+       if(Key == VK_DOWN) PaddleRightToDown -> Enabled = true;
 }
 //---------------------------------------------------------------------------
 
@@ -85,6 +87,21 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 {
       if(Key == 'A') PaddleLeftToUp -> Enabled = false;
       if(Key == 'Z') PaddleLeftToDown -> Enabled = false;
+      if(Key == VK_UP) PaddleRightToUp -> Enabled = false;
+      if(Key == VK_DOWN) PaddleRightToDown -> Enabled = false;
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TForm1::PaddleRightToDownTimer(TObject *Sender)
+{
+        if((PaddleRight->Top + PaddleRight->Height) < (Background->Top + Background->Height - 6))PaddleRight->Top += 10;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::PaddleRightToUpTimer(TObject *Sender)
+{
+        if(PaddleRight->Top > Background->Top + 6)PaddleRight->Top -= 10;
+}
+//---------------------------------------------------------------------------
+
 
