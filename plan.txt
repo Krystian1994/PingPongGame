@@ -1,0 +1,14 @@
+1. Stworzyć tło w builderze.
+2. Załadować grafikę piłki.
+3. Stworzyć Timer do piłki
+4. Okodować Timer: wartość przesunięcia piłki, szybkość przesunięcia i warunki odbicia góra, dół.
+5. Pobrać grafikę paletki, skopiować.
+6. Okodować brak odbicia paletką prawą i lewą w timerze piłki.
+7. Stworzyć dwa timery dla kżdej paletki góra dół.
+8. Okodować w Form1 klawisze podczas wciśnięcia i puszczania sterujące ruchem paletek.
+9. Okodować w timerach przesuwanie się paletek o liczbę pikseli w czasie (prędkość).
+10. Okodować w timerach zabezpieczenie paletek przed wysunięciem się poza ekran (if...).
+11. Zniwelowanie znikania piłki w ruchu (poprawa animacji) Form1->UseDockManager = true, Form1-> DockSite = true.
+12. Okodować w timerze piłki warunek skuchy/odbicia.
+13. Tworzenie okien, dzwieku, szmerów bajerów...
+
