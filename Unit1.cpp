@@ -4,6 +4,7 @@
 #pragma hdrstop
 
 #include "Unit1.h"
+#include "mmsystem.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -32,40 +33,41 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 y = -y;
         }
         //warunek odbicia lewej paletki
-        if(Ball->Left <= PaddleLeft->Left + 24 && (
-                Ball->Top + 16 >= PaddleLeft->Top &&
-                Ball->Top + 43 < PaddleLeft->Top ||
-                Ball->Top + 57 > PaddleLeft->Top &&
-                Ball->Top + 16 <= PaddleLeft->Top + 100))
+        if(Ball->Left <= PaddleLeft->Left + PaddleLeft->Width && (
+                (Ball->Top + Ball->Height/2 >= PaddleLeft->Top &&
+                Ball->Top + Ball->Height/2 < PaddleLeft->Top + PaddleLeft->Height/4) ||
+                (Ball->Top + Ball->Height/2 > PaddleLeft->Top + 75 &&
+                Ball->Top + Ball->Height/2 <= PaddleLeft->Top + PaddleLeft->Height)))
         {
+                sndPlaySound("snd/dzwiek.wav", SND_ASYNC);
+                x = -x;
                 BallTimer->Interval-=2;
-                x = -x;
         }
-        //warunek scinania pi³ki lew¹ paletk¹
-        if(Ball->Left <= PaddleLeft->Left + 24 &&
-                Ball->Top + 43 >= PaddleLeft->Top &&
-                Ball->Top + 57 <= PaddleLeft->Top)
+        else if(Ball->Left <= PaddleLeft->Left + PaddleLeft->Width &&           //warunek scinania pi³ki lew¹ paletk¹
+                Ball->Top + Ball->Height/2 >= PaddleLeft->Top + PaddleLeft->Height/4 &&
+                Ball->Top + Ball->Height/2 <= PaddleLeft->Top + 75)
         {
-                BallTimer->Interval+=7;
+                sndPlaySound("snd/d1.wav", SND_ASYNC);
                 x = -x;
+                BallTimer->Interval-=7;
         }
         //warunek odbicia prawej paletki
-        if(Ball->Left + Ball->Width + 4 >= PaddleRight->Left && (
-                Ball->Top + 16 >= PaddleRight->Top &&
-                Ball->Top + 43 < PaddleRight->Top ||
-                Ball->Top + 57 > PaddleRight->Top &&
-                Ball->Top + 16 <= PaddleRight->Top + 100))
+        if(Ball->Left + Ball->Width >= PaddleRight->Left && (
+                (Ball->Top + Ball->Height/2 >= PaddleRight->Top &&
+                Ball->Top + Ball->Height/2 < PaddleRight->Top + PaddleRight->Height/4) ||
+                (Ball->Top + Ball->Height/2 > PaddleRight->Top + 75 &&
+                Ball->Top + Ball->Height/2 <= PaddleRight->Top + PaddleRight->Height)))
         {
+                x = -x;
+                sndPlaySound("snd/dzwiek.wav", SND_ASYNC);
                 BallTimer->Interval-=2;
-                x = -x;
-        }
-        //warunek scinania pi³ki praw¹ paletk¹
-        if(Ball->Left + Ball->Width + 4 >= PaddleRight->Left &&
-                Ball->Top + 43 >= PaddleRight->Top &&
-                Ball->Top + 57 <= PaddleRight->Top)
+        }else  if(Ball->Left + Ball->Width >= PaddleRight->Left &&    //warunek scinania pi³ki praw¹ paletk¹
+                Ball->Top + Ball->Height/2 >= PaddleRight->Top + PaddleRight->Height/4 &&
+                Ball->Top + Ball->Height/2 <= PaddleRight->Top + 75)
         {
-                BallTimer->Interval+=7;
+                sndPlaySound("snd/d1.wav", SND_ASYNC);
                 x = -x;
+                BallTimer->Interval-=7;
         }
         // skucha z lewej
         if(Ball->Left < PaddleLeft->Left)
@@ -74,11 +76,11 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 Ball -> Visible = false;
         }
         // skucha z prawej
-       if(Ball->Left + 32 >= PaddleRight->Left + 20)
-       {
+        if(Ball->Left >= PaddleRight->Left + PaddleRight->Width)
+        {
                 Ball -> Enabled = false;
                 Ball -> Visible = false;
-       }
+        }
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::PaddleLeftToUpTimer(TObject *Sender)
