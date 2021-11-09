@@ -13,6 +13,7 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
@@ -26,8 +27,8 @@ object Form1: TForm1
     Brush.Color = clMoneyGreen
   end
   object Ball: TImage
-    Left = 480
-    Top = 240
+    Left = 488
+    Top = 32
     Width = 32
     Height = 32
     AutoSize = True
@@ -531,11 +532,115 @@ object Form1: TForm1
       17291E17291E17291E17291E17291EFFFFFF}
     Transparent = True
   end
+  object RightPoint: TLabel
+    Left = 296
+    Top = 96
+    Width = 459
+    Height = 45
+    Caption = 'Punkt Dla Gracza Prawego ->'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Visible = False
+  end
+  object LeftPoint: TLabel
+    Left = 296
+    Top = 96
+    Width = 445
+    Height = 45
+    Caption = '<- Punkt Dla Gracza Lewego'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Visible = False
+  end
+  object Result: TLabel
+    Left = 456
+    Top = 160
+    Width = 37
+    Height = 33
+    Alignment = taCenter
+    Caption = '0:0'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'Comic Sans MS'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
+  end
+  object ReflectionNumber: TLabel
+    Left = 456
+    Top = 224
+    Width = 172
+    Height = 38
+    Caption = 'Liczba odbic :'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Comic Sans MS'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
+  end
+  object LetsStart: TLabel
+    Left = 304
+    Top = 72
+    Width = 392
+    Height = 49
+    Alignment = taCenter
+    Caption = 'Zagrajmy w Ping-Ponga'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -35
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Visible = False
+  end
+  object NewGame: TButton
+    Left = 400
+    Top = 424
+    Width = 273
+    Height = 33
+    Caption = 'Nowa Gra!'
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -23
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    Visible = False
+    OnClick = NewGameClick
+  end
+  object NextRound: TButton
+    Left = 400
+    Top = 328
+    Width = 273
+    Height = 33
+    Caption = 'Nast'#281'pna Runda !'
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -23
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    Visible = False
+  end
   object BallTimer: TTimer
     Interval = 20
     OnTimer = BallTimerTimer
-    Left = 480
-    Top = 184
+    Left = 488
   end
   object PaddleLeftToUp: TTimer
     Enabled = False

@@ -10,5 +10,14 @@
 10. Okodować w timerach zabezpieczenie paletek przed wysunięciem się poza ekran (if...).
 11. Zniwelowanie znikania piłki w ruchu (poprawa animacji) Form1->UseDockManager = true, Form1-> DockSite = true.
 12. Okodować w timerze piłki warunek skuchy/odbicia.
-13. Tworzenie okien, dzwieku, szmerów bajerów...
+13. Piłka przyspiesza znacząco przy odbiciu środkiem paletki.
+14. Piła przyspiesza za każdym razem po odbiciu.
+15. Dzwięk przy zwykłym odbiciu paletką piłki. sndPlaySound("snd/d4.wav",SND_ASYNC) #include "mmsystem.h"a
+16. Dzwięk przy ścinaniu paletką piłki.
+. Tworzenie okien...
+1. Widocznosc labli i buttonów
+2. Odpowiednie wyświetlanie ze względu na wynik.
 
+Problemy:
+1. Brak dźwięku podczas ścinania paletką.
+2. Zatrzymanie piłki podczas odbicia (czasami).
