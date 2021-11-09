@@ -11,6 +11,42 @@
 TForm1 *Form1;
 int x = -8;
 int y = -8;
+int pLeft = 0;
+int pRight = 0;
+int NumberOfReflection = 0;
+void whenGetPoint()
+{
+        Form1->Result->Caption = IntToStr(pLeft) + ":" + IntToStr(pRight);
+        Form1->Result->Visible = true;
+        Form1->ReflectionNumber->Caption = "Liczba odbic: " + IntToStr(NumberOfReflection);
+        Form1->ReflectionNumber->Visible = true;
+        Form1->NextRound->Visible = true;
+        Form1->NextRound->Enabled = true;
+        Form1->NewGame->Visible = true;
+        Form1->NewGame->Enabled = true;
+        Form1->Ball -> Enabled = false;
+        Form1->Ball -> Visible = false;
+        Form1->BallTimer->Enabled = false;
+}
+void whenClickButtonNextOrNewGame()
+{
+        Form1->NewGame->Enabled = false;
+        Form1->NewGame->Visible = false;
+        Form1->NextRound->Visible = false;
+        Form1->NextRound->Enabled = false;
+        Form1->PaddleLeft->Top = 214;
+        Form1->PaddleRight->Top = 214;
+        Form1->Ball->Left = Form1->Background->Width/2 - Form1->Ball->Width/2;
+        Form1->Ball->Top = Form1->Background->Height/2 - Form1->Ball->Height/2;
+        Form1->BallTimer->Interval = 20;
+        Form1->BallTimer->Enabled = true;
+        Form1->Result->Visible = false;
+        Form1->ReflectionNumber->Visible = false;
+        Form1->Ball->Enabled = true;
+        Form1->Ball->Visible = true;
+        Form1->LeftPoint->Visible = false;
+        Form1->RightPoint->Visible = false;
+}
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
@@ -42,6 +78,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 sndPlaySound("snd/dzwiek.wav", SND_ASYNC);
                 x = -x;
                 BallTimer->Interval-=2;
+                NumberOfReflection++;
         }
         else if(Ball->Left <= PaddleLeft->Left + PaddleLeft->Width &&           //warunek scinania pi³ki lew¹ paletk¹
                 Ball->Top + Ball->Height/2 >= PaddleLeft->Top + PaddleLeft->Height/4 &&
@@ -50,6 +87,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 sndPlaySound("snd/d1.wav", SND_ASYNC);
                 x = -x;
                 BallTimer->Interval-=7;
+                NumberOfReflection++;
         }
         //warunek odbicia prawej paletki
         if(Ball->Left + Ball->Width >= PaddleRight->Left && (
@@ -58,28 +96,34 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 (Ball->Top + Ball->Height/2 > PaddleRight->Top + 75 &&
                 Ball->Top + Ball->Height/2 <= PaddleRight->Top + PaddleRight->Height)))
         {
-                x = -x;
                 sndPlaySound("snd/dzwiek.wav", SND_ASYNC);
+                x = -x;
                 BallTimer->Interval-=2;
-        }else  if(Ball->Left + Ball->Width >= PaddleRight->Left &&    //warunek scinania pi³ki praw¹ paletk¹
+                NumberOfReflection++;
+        }
+        else  if(Ball->Left + Ball->Width >= PaddleRight->Left &&    //warunek scinania pi³ki praw¹ paletk¹
                 Ball->Top + Ball->Height/2 >= PaddleRight->Top + PaddleRight->Height/4 &&
                 Ball->Top + Ball->Height/2 <= PaddleRight->Top + 75)
         {
                 sndPlaySound("snd/d1.wav", SND_ASYNC);
                 x = -x;
                 BallTimer->Interval-=7;
+                NumberOfReflection++;
         }
         // skucha z lewej
-        if(Ball->Left < PaddleLeft->Left)
+        if(Ball->Left + Ball->Width/2 < PaddleLeft->Left)
         {
-                Ball -> Enabled = false;
-                Ball -> Visible = false;
+                RightPoint->Visible = true;
+                pRight++;
+                whenGetPoint();
+
         }
         // skucha z prawej
-        if(Ball->Left >= PaddleRight->Left + PaddleRight->Width)
+        if(Ball->Left + Ball->Width >= PaddleRight->Left + PaddleRight->Width)
         {
-                Ball -> Enabled = false;
-                Ball -> Visible = false;
+                LeftPoint->Visible = true;
+                pLeft++;
+                whenGetPoint();
         }
 }
 //---------------------------------------------------------------------------
@@ -128,4 +172,31 @@ void __fastcall TForm1::PaddleRightToUpTimer(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+
+
+void __fastcall TForm1::FormCreate(TObject *Sender)
+{
+        BallTimer->Enabled = false;
+        NewGame->Visible = true;
+        NewGame->Enabled = true;
+        LetsStart->Visible = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::NewGameClick(TObject *Sender)
+{
+        LetsStart->Visible = false;
+        pLeft = 0;
+        pRight = 0;
+        NumberOfReflection = 0;
+        whenClickButtonNextOrNewGame();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::NextRoundClick(TObject *Sender)
+{
+        whenClickButtonNextOrNewGame();
+}
+//---------------------------------------------------------------------------
 
