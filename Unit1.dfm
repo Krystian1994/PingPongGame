@@ -639,6 +639,23 @@ object Form1: TForm1
     Visible = False
     OnClick = NextRoundClick
   end
+  object NewGame2: TButton
+    Left = 400
+    Top = 424
+    Width = 273
+    Height = 33
+    Caption = 'Nowa Gra!'
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -23
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    Visible = False
+    OnClick = NewGame2Click
+  end
   object BallTimer: TTimer
     Interval = 20
     OnTimer = BallTimerTimer
