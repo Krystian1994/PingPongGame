@@ -22,8 +22,8 @@ void whenGetPoint()
         Form1->ReflectionNumber->Visible = true;
         Form1->NextRound->Visible = true;
         Form1->NextRound->Enabled = true;
-        Form1->NewGame->Visible = true;
-        Form1->NewGame->Enabled = true;
+        Form1->NewGame2->Visible = true;
+        Form1->NewGame2->Enabled = true;
         Form1->Ball -> Enabled = false;
         Form1->Ball -> Visible = false;
         Form1->BallTimer->Enabled = false;
@@ -34,6 +34,8 @@ void whenClickButtonNextOrNewGame()
         Form1->NewGame->Visible = false;
         Form1->NextRound->Visible = false;
         Form1->NextRound->Enabled = false;
+        Form1->NewGame2->Visible = false;
+        Form1->NewGame2->Enabled = false;
         Form1->PaddleLeft->Top = 214;
         Form1->PaddleRight->Top = 214;
         Form1->Ball->Left = Form1->Background->Width/2 - Form1->Ball->Width/2;
@@ -46,6 +48,14 @@ void whenClickButtonNextOrNewGame()
         Form1->Ball->Visible = true;
         Form1->LeftPoint->Visible = false;
         Form1->RightPoint->Visible = false;
+}
+void startNewGame()
+{
+        Form1->LetsStart->Visible = false;
+        pLeft = 0;
+        pRight = 0;
+        NumberOfReflection = 0;
+        whenClickButtonNextOrNewGame();
 }
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -186,17 +196,22 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 
 void __fastcall TForm1::NewGameClick(TObject *Sender)
 {
-        LetsStart->Visible = false;
-        pLeft = 0;
-        pRight = 0;
-        NumberOfReflection = 0;
-        whenClickButtonNextOrNewGame();
+        startNewGame();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::NextRoundClick(TObject *Sender)
 {
         whenClickButtonNextOrNewGame();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::NewGame2Click(TObject *Sender)
+{
+        if(Application->MessageBox("Czy na pewno chcesz zaczπÊ od nowa?","Potwierdü", MB_YESNO | MB_ICONQUESTION) == IDYES)
+        {
+                startNewGame();
+        }
 }
 //---------------------------------------------------------------------------
 
