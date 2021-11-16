@@ -562,7 +562,7 @@ object Form1: TForm1
     Visible = False
   end
   object Result: TLabel
-    Left = 456
+    Left = 488
     Top = 160
     Width = 37
     Height = 33
@@ -577,8 +577,8 @@ object Form1: TForm1
     Visible = False
   end
   object ReflectionNumber: TLabel
-    Left = 456
-    Top = 224
+    Left = 424
+    Top = 216
     Width = 172
     Height = 38
     Caption = 'Liczba odbic :'
@@ -591,8 +591,8 @@ object Form1: TForm1
     Visible = False
   end
   object LetsStart: TLabel
-    Left = 304
-    Top = 72
+    Left = 312
+    Top = 88
     Width = 392
     Height = 49
     Alignment = taCenter
@@ -606,8 +606,8 @@ object Form1: TForm1
     Visible = False
   end
   object NewGame: TButton
-    Left = 400
-    Top = 424
+    Left = 376
+    Top = 416
     Width = 273
     Height = 33
     Caption = 'Nowa Gra!'
@@ -623,8 +623,8 @@ object Form1: TForm1
     OnClick = NewGameClick
   end
   object NextRound: TButton
-    Left = 400
-    Top = 328
+    Left = 376
+    Top = 320
     Width = 273
     Height = 33
     Caption = 'Nast'#281'pna Runda !'
@@ -640,8 +640,8 @@ object Form1: TForm1
     OnClick = NextRoundClick
   end
   object NewGame2: TButton
-    Left = 400
-    Top = 424
+    Left = 376
+    Top = 416
     Width = 273
     Height = 33
     Caption = 'Nowa Gra!'
