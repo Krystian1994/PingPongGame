@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 137
   Width = 1100
   Height = 588
-  Caption = 'Form1'
+  Caption = 'Ping Pong'
   Color = clBtnFace
   UseDockManager = True
   DockSite = True
@@ -23,7 +23,6 @@ object Form1: TForm1
     Top = 0
     Width = 1084
     Height = 549
-    Align = alClient
     Brush.Color = clMoneyGreen
   end
   object Ball: TImage
@@ -136,8 +135,8 @@ object Form1: TForm1
     Visible = False
   end
   object PaddleLeft: TImage
-    Left = 56
-    Top = 214
+    Left = 80
+    Top = 192
     Width = 20
     Height = 100
     AutoSize = True
@@ -335,7 +334,7 @@ object Form1: TForm1
     Transparent = True
   end
   object PaddleRight: TImage
-    Left = 1008
+    Left = 984
     Top = 214
     Width = 20
     Height = 100
@@ -657,7 +656,7 @@ object Form1: TForm1
     OnClick = NewGame2Click
   end
   object BallTimer: TTimer
-    Interval = 20
+    Interval = 15
     OnTimer = BallTimerTimer
     Left = 488
   end
