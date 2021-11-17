@@ -187,10 +187,19 @@ void __fastcall TForm1::PaddleRightToUpTimer(TObject *Sender)
 
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
+        Application->MessageBox("Witaj w grze PingPong.\n\n"
+                    "Lewy gracz steruje wciskaj¹c klawisze A oraz Z.\n"
+                    "Prawy gracz steruje wciskaj¹c strza³ki do góry i w dó³.\n"
+                    "Dla urozmaicenia zabawy:\n"
+                    "Kiedy odbijesz pi³kê na œrodku paletki, wówczas zmienisz jej k¹t odbicia i pi³ka przyspieszy, pojawi siê specyficzny dŸwiêk.\n"
+                    "Im d³u¿ej odbijasz tym pi³ka szybciej siê przemieszcza.\n"
+                    "Mo¿esz dowolnie zmieniaæ pole gry.\n\n"
+		    "Mi³ej zabawy!","Ping-Pong", MB_OK | MB_ICONINFORMATION);
         BallTimer->Enabled = false;
         NewGame->Visible = true;
         NewGame->Enabled = true;
         LetsStart->Visible = true;
+
 }
 //---------------------------------------------------------------------------
 
@@ -214,4 +223,5 @@ void __fastcall TForm1::NewGame2Click(TObject *Sender)
         }
 }
 //---------------------------------------------------------------------------
+
 
