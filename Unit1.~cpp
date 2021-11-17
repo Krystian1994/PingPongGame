@@ -79,57 +79,57 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 y = -y;
         }
         //warunek odbicia lewej paletki
-        if(Ball->Left < PaddleLeft->Left + PaddleLeft->Width && (
+        if(Ball->Left <= PaddleLeft->Left + PaddleLeft->Width && (
                 (Ball->Top + Ball->Height/2 >= PaddleLeft->Top &&
                 Ball->Top + Ball->Height/2 < PaddleLeft->Top + PaddleLeft->Height/4) ||
                 (Ball->Top + Ball->Height/2 > PaddleLeft->Top + 75 &&
                 Ball->Top + Ball->Height/2 <= PaddleLeft->Top + PaddleLeft->Height)))
         {
                 sndPlaySound("snd/dzwiek.wav", SND_ASYNC);
-                if(x<0) x = -x;
-                BallTimer->Interval-=2;
+                x = -x;
+                BallTimer->Interval-=1;
                 NumberOfReflection++;
         }
-        else if(Ball->Left <= PaddleLeft->Left + PaddleLeft->Width &&           //warunek scinania pi³ki lew¹ paletk¹
+        else if(Ball->Left <= PaddleLeft->Left + PaddleLeft->Width && //warunek scinania pi³ki lew¹ paletk¹
                 Ball->Top + Ball->Height/2 >= PaddleLeft->Top + PaddleLeft->Height/4 &&
                 Ball->Top + Ball->Height/2 <= PaddleLeft->Top + 75)
         {
                 sndPlaySound("snd/d1.wav", SND_ASYNC);
-                if(x<0) x = -x;
-                BallTimer->Interval-=7;
+                x = -x;
+                BallTimer->Interval-=4;
                 NumberOfReflection++;
         }
-        //warunek odbicia prawej paletki
-        if(Ball->Left + Ball->Width > PaddleRight->Left && (
-                (Ball->Top + Ball->Height/2 >= PaddleRight->Top &&
-                Ball->Top + Ball->Height/2 < PaddleRight->Top + PaddleRight->Height/4) ||
-                (Ball->Top + Ball->Height/2 > PaddleRight->Top + 75 &&
-                Ball->Top + Ball->Height/2 <= PaddleRight->Top + PaddleRight->Height)))
-        {
-                sndPlaySound("snd/dzwiek.wav", SND_ASYNC);
-                if(x>0) x = -x;
-                BallTimer->Interval-=2;
-                NumberOfReflection++;
-        }
-        else  if(Ball->Left + Ball->Width >= PaddleRight->Left &&    //warunek scinania pi³ki praw¹ paletk¹
-                Ball->Top + Ball->Height/2 >= PaddleRight->Top + PaddleRight->Height/4 &&
-                Ball->Top + Ball->Height/2 <= PaddleRight->Top + 75)
-        {
-                sndPlaySound("snd/d1.wav", SND_ASYNC);
-                if(x>0) x = -x;
-                BallTimer->Interval-=7;
-                NumberOfReflection++;
-        }
-        // skucha z lewej
-        if(Ball->Left <= PaddleLeft->Left - Ball->Width - 15)
+        else if(Ball->Left <= PaddleLeft->Left - Ball->Width - 15 ||
+                Ball->Left <= Background->Left)// skucha z lewej
         {
                 RightPoint->Visible = true;
                 pRight++;
                 whenGetPoint();
 
         }
-        // skucha z prawej
-        if(Ball->Left >= PaddleRight->Left + PaddleRight->Width + 15)
+        //warunek odbicia prawej paletki
+        if(Ball->Left + Ball->Width >= PaddleRight->Left && (
+                (Ball->Top + Ball->Height/2 >= PaddleRight->Top &&
+                Ball->Top + Ball->Height/2 < PaddleRight->Top + PaddleRight->Height/4) ||
+                (Ball->Top + Ball->Height/2 > PaddleRight->Top + 75 &&
+                Ball->Top + Ball->Height/2 <= PaddleRight->Top + PaddleRight->Height)))
+        {
+                sndPlaySound("snd/dzwiek.wav", SND_ASYNC);
+                x = -x;
+                BallTimer->Interval-=1;
+                NumberOfReflection++;
+        }
+        else  if(Ball->Left + Ball->Width >= PaddleRight->Left &&  //warunek scinania pi³ki praw¹ paletk¹
+                Ball->Top + Ball->Height/2 >= PaddleRight->Top + PaddleRight->Height/4 &&
+                Ball->Top + Ball->Height/2 <= PaddleRight->Top + 75)
+        {
+                sndPlaySound("snd/d1.wav", SND_ASYNC);
+                x = -x;
+                BallTimer->Interval-=4;
+                NumberOfReflection++;
+        }
+        else if(Ball->Left >= PaddleRight->Left + PaddleRight->Width + 15 ||
+                Ball->Left + Ball->Width >= Background->Left + Background->Width)// skucha z prawej
         {
                 LeftPoint->Visible = true;
                 pLeft++;
@@ -195,11 +195,11 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
                     "Im d³u¿ej odbijasz tym pi³ka szybciej siê przemieszcza.\n"
                     "Mo¿esz dowolnie zmieniaæ pole gry.\n\n"
 		    "Mi³ej zabawy!","Ping-Pong", MB_OK | MB_ICONINFORMATION);
+        startNewGame();
         BallTimer->Enabled = false;
         NewGame->Visible = true;
         NewGame->Enabled = true;
         LetsStart->Visible = true;
-
 }
 //---------------------------------------------------------------------------
 
