@@ -68,6 +68,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
 {
         Ball->Top += y;
         Ball->Left += x;
+
         // odbicie od góry
         if(Ball->Top < Background->Top + 4)
         {
@@ -79,14 +80,22 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 y = -y;
         }
         //warunek odbicia lewej paletki
-        if(Ball->Left <= PaddleLeft->Left + PaddleLeft->Width && (
-                (Ball->Top + Ball->Height/2 >= PaddleLeft->Top &&
-                Ball->Top + Ball->Height/2 < PaddleLeft->Top + PaddleLeft->Height/4) ||
+        if(Ball->Left + Ball->Width <= PaddleLeft->Left - 15)// skucha z lewej
+        {
+                RightPoint->Visible = true;
+                pRight++;
+                whenGetPoint();
+
+        }
+        else if((Ball->Top + Ball->Height/2 >= PaddleLeft->Top &&
+                Ball->Top + Ball->Height/2 < PaddleLeft->Top + PaddleLeft->Height/4 &&
+                Ball->Left <= PaddleLeft->Left + PaddleLeft->Width) ||
                 (Ball->Top + Ball->Height/2 > PaddleLeft->Top + 75 &&
-                Ball->Top + Ball->Height/2 <= PaddleLeft->Top + PaddleLeft->Height)))
+                Ball->Top + Ball->Height/2 <= PaddleLeft->Top + PaddleLeft->Height &&
+                Ball->Left <= PaddleLeft->Left + PaddleLeft->Width))
         {
                 sndPlaySound("snd/dzwiek.wav", SND_ASYNC);
-                x = -x;
+                if(x<0) x = -x;
                 BallTimer->Interval-=1;
                 NumberOfReflection++;
         }
@@ -95,27 +104,26 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 Ball->Top + Ball->Height/2 <= PaddleLeft->Top + 75)
         {
                 sndPlaySound("snd/d1.wav", SND_ASYNC);
-                x = -x;
+                if(x<0) x = -x;
                 BallTimer->Interval-=4;
                 NumberOfReflection++;
         }
-        else if(Ball->Left <= PaddleLeft->Left - Ball->Width - 15 ||
-                Ball->Left <= Background->Left)// skucha z lewej
-        {
-                RightPoint->Visible = true;
-                pRight++;
-                whenGetPoint();
-
-        }
         //warunek odbicia prawej paletki
-        if(Ball->Left + Ball->Width >= PaddleRight->Left && (
-                (Ball->Top + Ball->Height/2 >= PaddleRight->Top &&
-                Ball->Top + Ball->Height/2 < PaddleRight->Top + PaddleRight->Height/4) ||
+        if(Ball->Left >= PaddleRight->Left + PaddleRight->Width + 15)// skucha z prawej
+        {
+                LeftPoint->Visible = true;
+                pLeft++;
+                whenGetPoint();
+        }
+        else if((Ball->Top + Ball->Height/2 >= PaddleRight->Top &&
+                Ball->Top + Ball->Height/2 < PaddleRight->Top + PaddleRight->Height/4 &&
+                Ball->Left + Ball->Width >= PaddleRight->Left) ||
                 (Ball->Top + Ball->Height/2 > PaddleRight->Top + 75 &&
-                Ball->Top + Ball->Height/2 <= PaddleRight->Top + PaddleRight->Height)))
+                Ball->Top + Ball->Height/2 <= PaddleRight->Top + PaddleRight->Height &&
+                Ball->Left + Ball->Width >= PaddleRight->Left))
         {
                 sndPlaySound("snd/dzwiek.wav", SND_ASYNC);
-                x = -x;
+                if(x>0) x = -x;
                 BallTimer->Interval-=1;
                 NumberOfReflection++;
         }
@@ -124,16 +132,9 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 Ball->Top + Ball->Height/2 <= PaddleRight->Top + 75)
         {
                 sndPlaySound("snd/d1.wav", SND_ASYNC);
-                x = -x;
+                if(x>0) x = -x;
                 BallTimer->Interval-=4;
                 NumberOfReflection++;
-        }
-        else if(Ball->Left >= PaddleRight->Left + PaddleRight->Width + 15 ||
-                Ball->Left + Ball->Width >= Background->Left + Background->Width)// skucha z prawej
-        {
-                LeftPoint->Visible = true;
-                pLeft++;
-                whenGetPoint();
         }
 }
 //---------------------------------------------------------------------------
